@@ -1,0 +1,2 @@
+
+obj-y		:= axp260x.o axp260x_i2c.o

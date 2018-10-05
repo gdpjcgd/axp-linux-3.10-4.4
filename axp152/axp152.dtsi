@@ -1,0 +1,45 @@
+
+
+&axp152 {
+           	interrupt-parent = <&gpio0>;
+           	interrupts = <26 2>;
+           	reg = <0x30>;
+			status = "okay";
+			device_type = "pmu1";
+			compatible = "axp152";
+			pmu_id = <0x9>;
+			pmu_vbusen_func = <0x0>;
+			pmu_reset = <0x0>;
+			pmu_irq_wakeup = <0x1>;
+			pmu_hot_shutdown = <0x1>;
+			pmu_inshort = <0x1>;
+			pmu_chg_ic_temp = <0x0>;
+			pmu_on_ctl = <0x9>;
+			power_start = <0x0>;
+					
+          		powerkey@0 {
+				status = "okay";
+				device_type = "powerkey1";
+				compatible = "axp152-powerkey";
+				pmu_powkey_off_en = <0x1>;
+				pmu_powkey_off_time = <10000>;
+				pmu_powkey_long_time = <2000>;
+				pmu_powkey_on_time = <128>;
+			};
+                                  
+                regulator@0 {
+				status = "okay";
+				device_type = "regulator1";
+				compatible = "axp152-regulator";
+                                  };
+                                  
+                gpio@0 {
+				status = "okay";
+				device_type = "gpio1";
+				compatible = "axp152-gpio";
+                                  };
+	
+		
+
+		};
+

@@ -1,0 +1,8 @@
+/*for example*/	
+
+axp2601: axp2601@62 {
+	interrupts = <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>;
+        compatible = "x-powers, axp2601";
+	reg = <0x0062>;
+	status = "okay";
+			};

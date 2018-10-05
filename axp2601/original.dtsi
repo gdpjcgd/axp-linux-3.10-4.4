@@ -1,0 +1,17 @@
+/*for example*/	
+
+
+	s_twi0: s_twi@7081400 {
+			compatible = "allwinner,s_twi";
+			reg = <0x0 0x07081400 0x0 0x400>;
+			interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&s_twi0_pins_a>;
+			status = "okay";
+			
+			axp2601: axp2601@0 {
+				interrupts = <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>;
+				compatible = "x-powers, axp2601";
+				reg = <0x0062>;
+				status = "okay";
+			};
