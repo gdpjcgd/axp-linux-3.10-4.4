@@ -77,7 +77,17 @@ do {\
 } while (0)
 
 struct axp_charger_dev;
-
+#ifdef CONFIG_AXP_BC
+enum{
+    BC_SDP=1,
+    BC_CDP,
+    BC_DCP,//AXP2881 BC 1.2 only support SDP/CDP/DCP
+    BC_ACA_DOCK,
+    BC_ACA_A,
+    BC_ACA_B,
+    BC_ACA_C
+};
+#endif
 struct axp_config_info {
 	u32 pmu_used;
 	u32 pmu_id;

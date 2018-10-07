@@ -975,9 +975,9 @@ irqreturn_t axp_usb_in_isr(int irq, void *data)
 	axp_usb_connect = 1;
 	axp_change(chg_dev);
 	axp_usbac_in(chg_dev);
+    printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
 
 }
 
@@ -989,9 +989,9 @@ irqreturn_t axp_usb_out_isr(int irq, void *data)
 	axp_usb_connect = 0;
 	axp_change(chg_dev);
 	axp_usbac_out(chg_dev);
+    printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
 
 }
 
@@ -1002,9 +1002,9 @@ irqreturn_t axp_ac_in_isr(int irq, void *data)
 
 	axp_change(chg_dev);
 	axp_usbac_in(chg_dev);
+    printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
 
 }
 
@@ -1015,9 +1015,9 @@ irqreturn_t axp_ac_out_isr(int irq, void *data)
 
 	axp_change(chg_dev);
 	axp_usbac_out(chg_dev);
+    printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
 
 }
 
@@ -1027,9 +1027,9 @@ irqreturn_t axp_capchange_isr(int irq, void *data)
     printk("[axp]Entering isr :%s\n",__func__);
 
 	axp_capchange(chg_dev);
+    printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
 
 }
 
@@ -1039,9 +1039,9 @@ irqreturn_t axp_change_isr(int irq, void *data)
     printk("[axp]Entering isr :%s\n",__func__);
 
 	axp_change(chg_dev);
-
+	printk("[axp]Quit isr :%s\n",__func__);
 	return IRQ_HANDLED;
-    printk("[axp]Quit isr :%s\n",__func__);
+
 
 }
 

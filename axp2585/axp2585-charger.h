@@ -49,14 +49,6 @@
 	.store = _name##_store,                     \
 }
 
-enum{
-    BC_SDP=1,
-    BC_CDP,
-    BC_DCP,
-    BC_ACA_DOCK,
-    BC_ACA_A,
-    BC_ACA_B,
-    BC_ACA_C
-};
+
 
 #endif

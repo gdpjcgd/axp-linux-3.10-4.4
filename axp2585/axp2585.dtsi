@@ -14,7 +14,7 @@
 			pmu_hot_shutdown = <0x1>;
 			pmu_inshort = <0x1>;
             powerkey@0 {
-				status = "okay";
+				status =r "okay";
 				device_type = "powerkey0";
 				compatible = "axp2585-powerkey";
                                   };
@@ -36,7 +36,7 @@
 				pmu_boost_vol_limit = <0x1406>;
 				pmu_boost_vol_hold = <0xa28>;
 				pmu_ac_vol = <0xfa0>;
-				pmu_ac_cur = <0xbb8>;
+				pmu_ac_cur = <2500>;
 				pmu_usbpc_vol = <0x1130>;
 				pmu_usbpc_cur = <0x1f4>;
 				pmu_battery_warning_level1 = <0xf>;
