@@ -24,7 +24,7 @@
 #include <linux/power_supply.h>
 #include "../axp-core.h"
 #include "../axp-charger.h"
-#include "axp803-charger.h"
+#include "axp2881-charger.h"
 
 static int axp803_get_ac_voltage(struct axp_charger_dev *cdev)
 {

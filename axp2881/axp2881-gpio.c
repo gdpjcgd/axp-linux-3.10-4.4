@@ -33,7 +33,7 @@
 #include "../../../../pinctrl/core.h"
 #include "../axp-core.h"
 #include "../axp-gpio.h"
-#include "axp803-gpio.h"
+#include "axp2881-gpio.h"
 
 static struct axp_gpio_irqchip *axp803_gpio_irqchip;
 static int axp803_pmu_num;

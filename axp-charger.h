@@ -198,6 +198,14 @@ struct axp_ac_info {
 	int in_short_offset;
 	int ac_vol;
 	int ac_cur;
+#ifdef CONFIG_AXP_BC
+  int bc_enable_reg;
+  int bc_enable_bit;
+  int bc_result_reg;
+  int bc_result_bit_offset;
+  u8 (*enable_bc)(struct axp_charger_dev *cdev);
+  u8 (*get_bc_result)(struct axp_charger_dev *cdev);
+#endif
 	int (*get_ac_voltage)(struct axp_charger_dev *cdev);
 	int (*get_ac_current)(struct axp_charger_dev *cdev);
 	int (*set_ac_vhold)(struct axp_charger_dev *cdev, int vol);
@@ -216,6 +224,14 @@ struct axp_usb_info {
 	int usb_pc_cur;
 	int usb_ad_vol;
 	int usb_ad_cur;
+#ifdef CONFIG_AXP_BC
+  int bc_enable_reg;
+  int bc_enable_bit;
+  int bc_result_reg;
+  int bc_result_bit_offset;
+  u8 (*enable_bc)(struct axp_charger_dev *cdev);
+  u8 (*get_bc_result)(struct axp_charger_dev *cdev);
+#endif
 	int (*get_usb_voltage)(struct axp_charger_dev *cdev);
 	int (*get_usb_current)(struct axp_charger_dev *cdev);
 	int (*set_usb_vhold)(struct axp_charger_dev *cdev, int vol);

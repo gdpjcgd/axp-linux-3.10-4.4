@@ -11,8 +11,9 @@
  */
 
 #ifndef AXP803_GPIO_H
+
 #define AXP803_GPIO_H
-#include "axp803.h"
+#include "axp2881.h"
 
 #define AXP_GPIO_IRQ_EDGE_RISING   (0x1<<7)
 #define AXP_GPIO_IRQ_EDGE_FALLING  (0x1<<6)

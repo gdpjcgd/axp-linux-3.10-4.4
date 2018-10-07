@@ -23,8 +23,8 @@
 #include <linux/power/axp_depend.h>
 #include "../axp-core.h"
 #include "../axp-regulator.h"
-#include "axp803.h"
-#include "axp803-regulator.h"
+#include "axp2881.h"
+#include "axp2881-regulator.h"
 
 enum AXP_REGLS {
 	VCC_DCDC1,

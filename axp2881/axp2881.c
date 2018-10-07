@@ -1,3 +1,5 @@
+#include "axp2881.h"
+
 /*
  * drivers/power/axp/axp803/axp803.c
  * (C) Copyright 2010-2016
@@ -30,8 +32,7 @@
 #include "../axp-core.h"
 #include "../axp-charger.h"
 #include "../axp-regulator.h"
-#include "axp803.h"
-#include "axp803-regulator.h"
+#include "axp2881-regulator.h"
 
 static struct axp_dev *axp803_pm_power;
 struct axp_config_info axp803_config;

@@ -28,7 +28,7 @@
 #include <linux/input.h>
 #include "../axp-core.h"
 #include "../axp-powerkey.h"
-#include "axp803.h"
+#include "axp2881.h"
 
 static int axp803_powerkey_probe(struct platform_device *pdev)
 {

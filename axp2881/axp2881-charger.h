@@ -11,8 +11,9 @@
  */
 
 #ifndef AXP803_CHARGER_H
+
 #define AXP803_CHARGER_H
-#include "axp803.h"
+#include "axp2881.h"
 
 #define AXP803_CHARGER_ENABLE            (1 << 7)
 #define AXP803_IN_CHARGE                 (1 << 6)
