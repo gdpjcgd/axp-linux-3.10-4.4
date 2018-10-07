@@ -14,7 +14,7 @@
 			pmu_hot_shutdown = <0x1>;
 			pmu_inshort = <0x1>;
             powerkey@0 {
-				status =r "okay";
+				status ="okay";
 				device_type = "powerkey0";
 				compatible = "axp2585-powerkey";
                                   };
