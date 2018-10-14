@@ -1,3 +1,5 @@
+#include "../axp202/axp202-regu.h"
+
 /*
  * Regulators driver for allwinnertech AXP20
  *
@@ -18,8 +20,7 @@
 #include <linux/power/axp_depend.h>
 #include "../axp-core.h"
 #include "../axp-regulator.h"
-#include "axp20.h"
-#include "axp20-regu.h"
+#include "../axp202/axp202.h"
 
 /* Reverse engineered partly from Platformx drivers */
 enum AXP_REGLS {

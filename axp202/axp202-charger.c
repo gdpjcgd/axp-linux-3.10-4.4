@@ -1,3 +1,5 @@
+#include "../axp202/axp202-charger.h"
+
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/delay.h>
@@ -10,7 +12,6 @@
 #include <linux/power_supply.h>
 #include "../axp-core.h"
 #include "../axp-charger.h"
-#include "axp20-charger.h"
 
 static int axp20_get_ac_voltage(struct axp_charger_dev *cdev)
 {

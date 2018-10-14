@@ -1,6 +1,7 @@
 #ifndef AXP20_SPLY_H
+
 #define AXP20_SPLY_H
-#include "axp20.h"
+#include "../axp202/axp202.h"
 
 /*      AXP20      */
 #define AXP20_CHARGE_STATUS                 AXP20_STATUS

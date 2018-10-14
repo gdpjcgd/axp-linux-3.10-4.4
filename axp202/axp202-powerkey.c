@@ -14,7 +14,7 @@
 #include <linux/input.h>
 #include "../axp-core.h"
 #include "../axp-powerkey.h"
-#include "axp20.h"
+#include "../axp202/axp202.h"
 
 static int axp20_powerkey_probe(struct platform_device *pdev)
 {

@@ -43,7 +43,15 @@ static int axp2585_get_ac_ihold(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
+static int axp2585_read_bc_result(struct axp_charger_dev *cdev)
+{
+    u8 ret=0,val=0;
+    struct axp_regmap *map = cdev->chip->regmap;
+    axp_regmap_read(map, 0x01, &val);
+    val=(val&0xe0)>>5;
 
+    return ret;
+}
 static struct axp_ac_info axp2585_ac_info = {
 	.det_bit         = 1,
 	.det_offset      = 0,
@@ -147,15 +155,7 @@ static struct axp_usb_info axp2585_usb_info = {
 	.set_usb_ihold   = axp2585_set_usb_ihold,
 	.get_usb_ihold   = axp2585_get_usb_ihold,
 };
-static int axp2585_read_bc_result(struct axp_charger_dev *cdev)
-{
-    u8 ret,val;
-    struct axp_regmap *map = cdev->chip->regmap;
-    axp_regmap_read(map, 0x01, &val);
-    val=(val&0xe0)>>5;
 
-    return ret;
-}
 static int axp2585_get_rest_cap(struct axp_charger_dev *cdev)
 {
 	u8 val, temp_val[2], tmp[2];

@@ -968,12 +968,13 @@ void axp_capchange(struct axp_charger_dev *chg_dev)
 }
 EXPORT_SYMBOL_GPL(axp_capchange);
 struct delayed_work axp_usb_delayed_work;
-void axp_usb_isr_delayed(struct axp_charger_dev *chg_dev_ptr)
+void axp_usb_isr_delayed(struct axp_charger_dev *data)
 {
+    struct axp_charger_dev *chg_dev = data;
         printk("[axp]Entering isr :%s\n",__func__);
         axp_usb_connect = 1;
-        axp_change(chg_dev_ptr);
-        axp_usbac_in(chg_dev_ptr);
+        axp_change(chg_dev);
+        axp_usbac_in(chg_dev);
         printk("[axp]Quit isr :%s\n",__func__);
 
 }
@@ -986,8 +987,8 @@ irqreturn_t axp_usb_in_isr(int irq, void *data)
 	axp_change(chg_dev);
 	axp_usbac_in(chg_dev);
 #endif
-	INIT_DELAYED_WORK(axp_usb_delayed_work,axp_usb_isr_delayed);
-	schedule_delayed_work(axp_usb_delayed_work,msecs_to_jiffies(850));
+	INIT_DELAYED_WORK(&axp_usb_delayed_work,axp_usb_isr_delayed);
+	schedule_delayed_work(&axp_usb_delayed_work,msecs_to_jiffies(850));
     printk("[axp]Quit isr :%s\n",__func__);
 
 	return IRQ_HANDLED;

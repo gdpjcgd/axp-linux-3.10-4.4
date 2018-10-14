@@ -1,3 +1,5 @@
+#include "../axp202/axp202-gpio.h"
+
 #include <linux/io.h>
 #include <linux/clk.h>
 #include <linux/gpio.h>
@@ -20,7 +22,6 @@
 #include "../../../pinctrl/core.h"
 #include "../axp-core.h"
 #include "../axp-gpio.h"
-#include "axp20-gpio.h"
 
 static int axp20_gpio_get_data(struct axp_dev *axp_dev, int gpio)
 {

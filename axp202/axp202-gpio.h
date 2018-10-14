@@ -1,6 +1,7 @@
 #ifndef AXP20_GPIO_H
+
 #define AXP20_GPIO_H
-#include "axp20.h"
+#include "../axp202/axp202.h"
 
 #define AXP_GPIO0_CFG        (AXP20_GPIO0_CTL)       /* 0x90 */
 #define AXP_GPIO1_CFG        (AXP20_GPIO1_CTL)       /* 0x92 */

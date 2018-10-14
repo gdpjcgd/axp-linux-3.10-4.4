@@ -1,3 +1,5 @@
+#include "../axp202/axp202.h"
+
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/reboot.h>
@@ -14,7 +16,6 @@
 #include <linux/power/aw_pm.h>
 #include "../axp-core.h"
 #include "../axp-charger.h"
-#include "axp20.h"
 
 static struct axp_dev *axp20_pm_power;
 struct axp_config_info axp20_config;
