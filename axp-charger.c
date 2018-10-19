@@ -24,6 +24,8 @@
 #include <linux/slab.h>
 #include <linux/power_supply.h>
 #include <linux/of_device.h>
+#include <linux/of.h>
+#include<linux/of_platform.h>
 #include <linux/interrupt.h>
 #include "axp-core.h"
 #include "axp-charger.h"
@@ -968,19 +970,29 @@ void axp_capchange(struct axp_charger_dev *chg_dev)
 }
 EXPORT_SYMBOL_GPL(axp_capchange);
 struct delayed_work axp_usb_delayed_work;
-void axp_usb_isr_delayed(struct axp_charger_dev *data)
+void axp_usb_isr_delayed(void)
 {
-    struct axp_charger_dev *chg_dev = data;
+    char *axp_dt_dev_type="charger0";
+   u8 bc_result=0;
+    struct device_node *dev_node;
+    struct platform_device *axp_chg_dev;
+    dev_node=of_find_node_by_type(NULL,axp_dt_dev_type);
+    axp_chg_dev=of_find_device_by_node(dev_node);
+    printk("[axp]name of axp_chg_dev :%s\n",axp_chg_dev->name);
+    struct axp_charger_dev *chg_dev ;
+    chg_dev=platform_get_drvdata(axp_chg_dev);
         printk("[axp]Entering isr :%s\n",__func__);
         axp_usb_connect = 1;
         axp_change(chg_dev);
         axp_usbac_in(chg_dev);
+        bc_result=chg_dev->spy_info->usb->get_bc_result(chg_dev);
+        printk("[axp] BC result:%d\n",bc_result);
         printk("[axp]Quit isr :%s\n",__func__);
 
 }
 irqreturn_t axp_usb_in_isr(int irq, void *data)
 {
-	struct axp_charger_dev *chg_dev = data;
+	//struct axp_charger_dev *chg_dev = data;
     printk("[axp]Entering isr :%s\n",__func__);
 #if 0
     axp_usb_connect = 1;

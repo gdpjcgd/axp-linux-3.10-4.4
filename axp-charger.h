@@ -382,6 +382,7 @@ struct axp_charger_dev *axp_power_supply_register(struct device *dev,
 					struct power_supply_info *battery_info,
 					struct axp_supply_info *info);
 void axp_power_supply_unregister(struct axp_charger_dev *chg_dev);
+extern void axp_usb_isr_delayed(void);
 void axp_change(struct axp_charger_dev *chg_dev);
 void axp_usbac_in(struct axp_charger_dev *chg_dev);
 void axp_usbac_out(struct axp_charger_dev *chg_dev);

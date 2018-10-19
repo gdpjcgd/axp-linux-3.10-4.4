@@ -43,14 +43,15 @@ static int axp2585_get_ac_ihold(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
-static int axp2585_read_bc_result(struct axp_charger_dev *cdev)
+static u8 axp2585_read_bc_result(struct axp_charger_dev *cdev)
 {
-    u8 ret=0,val=0;
+    u8 val=0;
     struct axp_regmap *map = cdev->chip->regmap;
     axp_regmap_read(map, 0x01, &val);
+    printk("[axp2585]val=0x%x in %s\n",val,__func__);
     val=(val&0xe0)>>5;
-
-    return ret;
+    printk("[axp2585]val=0x%x in %s\n",val,__func__);
+    return val;
 }
 static struct axp_ac_info axp2585_ac_info = {
 	.det_bit         = 1,

@@ -13,62 +13,62 @@
 #include "../axp-core.h"
 #include "../axp-charger.h"
 
-static int axp20_get_ac_voltage(struct axp_charger_dev *cdev)
+static int axp202_get_ac_voltage(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static int axp20_get_ac_current(struct axp_charger_dev *cdev)
+static int axp202_get_ac_current(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static int axp20_set_ac_vhold(struct axp_charger_dev *cdev, int vol)
+static int axp202_set_ac_vhold(struct axp_charger_dev *cdev, int vol)
 {
 	return 0;
 }
 
-static int axp20_get_ac_vhold(struct axp_charger_dev *cdev)
+static int axp202_get_ac_vhold(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static int axp20_set_ac_ihold(struct axp_charger_dev *cdev, int cur)
+static int axp202_set_ac_ihold(struct axp_charger_dev *cdev, int cur)
 {
 	return 0;
 }
 
-static int axp20_get_ac_ihold(struct axp_charger_dev *cdev)
+static int axp202_get_ac_ihold(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static struct axp_ac_info axp20_ac_info = {
+static struct axp_ac_info axp202_ac_info = {
 	.det_bit         = 7,
 	.det_offset      = AXP20_CHARGE_STATUS,
 	.valid_bit       = 6,
 	.valid_offset    = AXP20_CHARGE_STATUS,
 	.in_short_bit    = 1,
 	.in_short_offset = AXP20_CHARGE_STATUS,
-	.get_ac_voltage  = axp20_get_ac_voltage,
-	.get_ac_current  = axp20_get_ac_current,
-	.set_ac_vhold    = axp20_set_ac_vhold,
-	.get_ac_vhold    = axp20_get_ac_vhold,
-	.set_ac_ihold    = axp20_set_ac_ihold,
-	.get_ac_ihold    = axp20_get_ac_ihold,
+	.get_ac_voltage  = axp202_get_ac_voltage,
+	.get_ac_current  = axp202_get_ac_current,
+	.set_ac_vhold    = axp202_set_ac_vhold,
+	.get_ac_vhold    = axp202_get_ac_vhold,
+	.set_ac_ihold    = axp202_set_ac_ihold,
+	.get_ac_ihold    = axp202_get_ac_ihold,
 };
 
-static int axp20_get_usb_voltage(struct axp_charger_dev *cdev)
+static int axp202_get_usb_voltage(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static int axp20_get_usb_current(struct axp_charger_dev *cdev)
+static int axp202_get_usb_current(struct axp_charger_dev *cdev)
 {
 	return 0;
 }
 
-static int axp20_set_usb_vhold(struct axp_charger_dev *cdev, int vol)
+static int axp202_set_usb_vhold(struct axp_charger_dev *cdev, int vol)
 {
 	u8 tmp;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -81,7 +81,7 @@ static int axp20_set_usb_vhold(struct axp_charger_dev *cdev, int vol)
 				AXP20_CHARGE_VBUS, tmp<<3, 0x7<<3);
 		} else {
 			pr_err("set usb limit voltage error, %d mV\n",
-				axp20_config.pmu_usbpc_vol);
+				axp202_config.pmu_usbpc_vol);
 		}
 	} else {
 		axp_regmap_clr_bits(map, AXP20_CHARGE_VBUS, 0x40);
@@ -91,7 +91,7 @@ static int axp20_set_usb_vhold(struct axp_charger_dev *cdev, int vol)
 
 }
 
-static int axp20_get_usb_vhold(struct axp_charger_dev *cdev)
+static int axp202_get_usb_vhold(struct axp_charger_dev *cdev)
 {
 	u8 tmp;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -102,7 +102,7 @@ static int axp20_get_usb_vhold(struct axp_charger_dev *cdev)
 	return 4000 + tmp * 100;
 }
 
-static int axp20_set_usb_ihold(struct axp_charger_dev *cdev, int cur)
+static int axp202_set_usb_ihold(struct axp_charger_dev *cdev, int cur)
 {
 	struct axp_regmap *map = cdev->chip->regmap;
 
@@ -118,7 +118,7 @@ static int axp20_set_usb_ihold(struct axp_charger_dev *cdev, int cur)
 	return 0;
 }
 
-static int axp20_get_usb_ihold(struct axp_charger_dev *cdev)
+static int axp202_get_usb_ihold(struct axp_charger_dev *cdev)
 {
 	u8 tmp;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -134,20 +134,20 @@ static int axp20_get_usb_ihold(struct axp_charger_dev *cdev)
 		return 0;
 }
 
-static struct axp_usb_info axp20_usb_info = {
+static struct axp_usb_info axp202_usb_info = {
 	.det_bit         = 5,
 	.det_offset      = AXP20_CHARGE_STATUS,
 	.valid_bit       = 4,
 	.valid_offset    = AXP20_CHARGE_STATUS,
-	.get_usb_voltage = axp20_get_usb_voltage,
-	.get_usb_current = axp20_get_usb_current,
-	.set_usb_vhold   = axp20_set_usb_vhold,
-	.get_usb_vhold   = axp20_get_usb_vhold,
-	.set_usb_ihold   = axp20_set_usb_ihold,
-	.get_usb_ihold   = axp20_get_usb_ihold,
+	.get_usb_voltage = axp202_get_usb_voltage,
+	.get_usb_current = axp202_get_usb_current,
+	.set_usb_vhold   = axp202_set_usb_vhold,
+	.get_usb_vhold   = axp202_get_usb_vhold,
+	.set_usb_ihold   = axp202_set_usb_ihold,
+	.get_usb_ihold   = axp202_get_usb_ihold,
 };
 
-static int axp20_get_rest_cap(struct axp_charger_dev *cdev)
+static int axp202_get_rest_cap(struct axp_charger_dev *cdev)
 {
 	u8 val;
 	int rest_vol;
@@ -162,7 +162,7 @@ static int axp20_get_rest_cap(struct axp_charger_dev *cdev)
 	return rest_vol;
 }
 
-static int axp20_get_bat_health(struct axp_charger_dev *cdev)
+static int axp202_get_bat_health(struct axp_charger_dev *cdev)
 {
 	u8 val;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -178,12 +178,12 @@ static int axp20_get_bat_health(struct axp_charger_dev *cdev)
 		return POWER_SUPPLY_HEALTH_GOOD;
 }
 
-static inline int axp20_vbat_to_mV(u32 reg)
+static inline int axp202_vbat_to_mV(u32 reg)
 {
 	return ((int)(((reg >> 8) << 4) | (reg & 0x000F))) * 1100 / 1000;
 }
 
-static int axp20_get_vbat(struct axp_charger_dev *cdev)
+static int axp202_get_vbat(struct axp_charger_dev *cdev)
 {
 	u8 tmp[2];
 	u32 res;
@@ -192,20 +192,20 @@ static int axp20_get_vbat(struct axp_charger_dev *cdev)
 	axp_regmap_reads(map, AXP20_VBATH_RES, 2, tmp);
 	res = (tmp[0] << 8) | tmp[1];
 
-	return axp20_vbat_to_mV(res);
+	return axp202_vbat_to_mV(res);
 }
 
-static inline int axp20_ibat_to_mA(u32 reg)
+static inline int axp202_ibat_to_mA(u32 reg)
 {
 	return ((int)(((reg >> 8) << 5) | (reg & 0x001F))) * 500 / 1000;
 }
 
-static inline int axp20_icharge_to_mA(u32 reg)
+static inline int axp202_icharge_to_mA(u32 reg)
 {
 	return ((int)(((reg >> 8) << 4) | (reg & 0x000F))) * 500 / 1000;
 }
 
-static int axp20_get_ibat(struct axp_charger_dev *cdev)
+static int axp202_get_ibat(struct axp_charger_dev *cdev)
 {
 	u8 tmp[2];
 	u32 res;
@@ -214,10 +214,10 @@ static int axp20_get_ibat(struct axp_charger_dev *cdev)
 	axp_regmap_reads(map, AXP20_IBATH_REG, 2, tmp);
 	res = (tmp[0] << 8) | tmp[1];
 
-	return axp20_icharge_to_mA(res);
+	return axp202_icharge_to_mA(res);
 }
 
-static int axp20_get_disibat(struct axp_charger_dev *cdev)
+static int axp202_get_disibat(struct axp_charger_dev *cdev)
 {
 	u8 tmp[2];
 	u32 dis_res;
@@ -226,10 +226,10 @@ static int axp20_get_disibat(struct axp_charger_dev *cdev)
 	axp_regmap_reads(map, AXP20_DISIBATH_REG, 2, tmp);
 	dis_res = (tmp[0] << 8) | tmp[1];
 
-	return axp20_ibat_to_mA(dis_res);
+	return axp202_ibat_to_mA(dis_res);
 }
 
-static int axp20_set_chg_cur(struct axp_charger_dev *cdev, int cur)
+static int axp202_set_chg_cur(struct axp_charger_dev *cdev, int cur)
 {
 	uint8_t tmp = 0;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -253,7 +253,7 @@ static int axp20_set_chg_cur(struct axp_charger_dev *cdev, int cur)
 	return 0;
 }
 
-static int axp20_set_chg_vol(struct axp_charger_dev *cdev, int vol)
+static int axp202_set_chg_vol(struct axp_charger_dev *cdev, int vol)
 {
 	uint8_t tmp = 0;
 	struct axp_regmap *map = cdev->chip->regmap;
@@ -275,20 +275,20 @@ static int axp20_set_chg_vol(struct axp_charger_dev *cdev, int vol)
 	return 0;
 }
 
-static struct axp_battery_info axp20_batt_info = {
+static struct axp_battery_info axp202_batt_info = {
 	.chgstat_bit          = 6,
 	.chgstat_offset       = AXP20_MODE_CHGSTATUS,
 	.det_bit              = 5,
 	.det_offset           = AXP20_MODE_CHGSTATUS,
 	.cur_direction_bit    = 2,
 	.cur_direction_offset = AXP20_CHARGE_STATUS,
-	.get_rest_cap         = axp20_get_rest_cap,
-	.get_bat_health       = axp20_get_bat_health,
-	.get_vbat             = axp20_get_vbat,
-	.get_ibat             = axp20_get_ibat,
-	.get_disibat          = axp20_get_disibat,
-	.set_chg_cur          = axp20_set_chg_cur,
-	.set_chg_vol          = axp20_set_chg_vol,
+	.get_rest_cap         = axp202_get_rest_cap,
+	.get_bat_health       = axp202_get_bat_health,
+	.get_vbat             = axp202_get_vbat,
+	.get_ibat             = axp202_get_ibat,
+	.get_disibat          = axp202_get_disibat,
+	.set_chg_cur          = axp202_set_chg_cur,
+	.set_chg_vol          = axp202_set_chg_vol,
 };
 
 static struct power_supply_info battery_data = {
@@ -299,20 +299,20 @@ static struct power_supply_info battery_data = {
 	.use_for_apm = 1,
 };
 
-static struct axp_supply_info axp20_spy_info = {
-	.ac   = &axp20_ac_info,
-	.usb  = &axp20_usb_info,
-	.batt = &axp20_batt_info,
+static struct axp_supply_info axp202_spy_info = {
+	.ac   = &axp202_ac_info,
+	.usb  = &axp202_usb_info,
+	.batt = &axp202_batt_info,
 };
 
-static int axp20_charger_init(struct axp_dev *axp_dev)
+static int axp202_charger_init(struct axp_dev *axp_dev)
 {
 	u8 ocv_cap[32];
 	u8 val;
 	int rdc;
 	struct axp_regmap *map = axp_dev->regmap;
 
-	if (axp20_config.pmu_init_chgend_rate == 10)
+	if (axp202_config.pmu_init_chgend_rate == 10)
 		val &= ~(1 << 4);
 	else
 		val |= 1 << 4;
@@ -320,19 +320,19 @@ static int axp20_charger_init(struct axp_dev *axp_dev)
 	val &= 0x7F;
 	axp_regmap_write(map, AXP20_CHARGE_CONTROL1, val);
 
-	if (axp20_config.pmu_init_chg_pretime < 40)
-		axp20_config.pmu_init_chg_pretime = 40;
+	if (axp202_config.pmu_init_chg_pretime < 40)
+		axp202_config.pmu_init_chg_pretime = 40;
 
-	if (axp20_config.pmu_init_chg_csttime < 360)
-		axp20_config.pmu_init_chg_csttime = 360;
+	if (axp202_config.pmu_init_chg_csttime < 360)
+		axp202_config.pmu_init_chg_csttime = 360;
 
-	val = ((((axp20_config.pmu_init_chg_pretime - 40) / 10) << 6)
-			| ((axp20_config.pmu_init_chg_csttime - 360) / 120));
+	val = ((((axp202_config.pmu_init_chg_pretime - 40) / 10) << 6)
+			| ((axp202_config.pmu_init_chg_csttime - 360) / 120));
 	axp_regmap_update(map, AXP20_CHARGE_CONTROL2, val, 0xC2);
 
 	/* adc set */
 	val = AXP20_ADC_BATVOL_ENABLE | AXP20_ADC_BATCUR_ENABLE;
-	if (0 != axp20_config.pmu_bat_temp_enable)
+	if (0 != axp202_config.pmu_bat_temp_enable)
 		val = val | AXP20_ADC_TSVOL_ENABLE;
 	axp_regmap_update(map, AXP20_ADC_CONTROL1, val,
 						AXP20_ADC_BATVOL_ENABLE
@@ -340,7 +340,7 @@ static int axp20_charger_init(struct axp_dev *axp_dev)
 						| AXP20_ADC_TSVOL_ENABLE);
 
 	axp_regmap_read(map, AXP20_ADC_CONTROL3, &val);
-	switch (axp20_config.pmu_init_adc_freq / 25) {
+	switch (axp202_config.pmu_init_adc_freq / 25) {
 	case 1:
 		val &= ~(3 << 6);
 		break;
@@ -359,56 +359,56 @@ static int axp20_charger_init(struct axp_dev *axp_dev)
 		break;
 	}
 
-	if (0 != axp20_config.pmu_bat_temp_enable)
+	if (0 != axp202_config.pmu_bat_temp_enable)
 		val &= (~(1 << 2));
 	axp_regmap_write(map, AXP20_ADC_CONTROL3, val);
 
 	/* bat para */
-	ocv_cap[0]  = axp20_config.pmu_bat_para1;
-	ocv_cap[1]  = axp20_config.pmu_bat_para2;
-	ocv_cap[2]  = axp20_config.pmu_bat_para3;
-	ocv_cap[3]  = axp20_config.pmu_bat_para4;
-	ocv_cap[4]  = axp20_config.pmu_bat_para5;
-	ocv_cap[5]  = axp20_config.pmu_bat_para6;
-	ocv_cap[6]  = axp20_config.pmu_bat_para7;
-	ocv_cap[7]  = axp20_config.pmu_bat_para8;
-	ocv_cap[8]  = axp20_config.pmu_bat_para9;
-	ocv_cap[9]  = axp20_config.pmu_bat_para10;
-	ocv_cap[10] = axp20_config.pmu_bat_para11;
-	ocv_cap[11] = axp20_config.pmu_bat_para12;
-	ocv_cap[12] = axp20_config.pmu_bat_para13;
-	ocv_cap[13] = axp20_config.pmu_bat_para14;
-	ocv_cap[14] = axp20_config.pmu_bat_para15;
-	ocv_cap[15] = axp20_config.pmu_bat_para16;
+	ocv_cap[0]  = axp202_config.pmu_bat_para1;
+	ocv_cap[1]  = axp202_config.pmu_bat_para2;
+	ocv_cap[2]  = axp202_config.pmu_bat_para3;
+	ocv_cap[3]  = axp202_config.pmu_bat_para4;
+	ocv_cap[4]  = axp202_config.pmu_bat_para5;
+	ocv_cap[5]  = axp202_config.pmu_bat_para6;
+	ocv_cap[6]  = axp202_config.pmu_bat_para7;
+	ocv_cap[7]  = axp202_config.pmu_bat_para8;
+	ocv_cap[8]  = axp202_config.pmu_bat_para9;
+	ocv_cap[9]  = axp202_config.pmu_bat_para10;
+	ocv_cap[10] = axp202_config.pmu_bat_para11;
+	ocv_cap[11] = axp202_config.pmu_bat_para12;
+	ocv_cap[12] = axp202_config.pmu_bat_para13;
+	ocv_cap[13] = axp202_config.pmu_bat_para14;
+	ocv_cap[14] = axp202_config.pmu_bat_para15;
+	ocv_cap[15] = axp202_config.pmu_bat_para16;
 	axp_regmap_writes(map, 0xC0, 16, ocv_cap);
 
 	/*Init CHGLED function*/
-	if (axp20_config.pmu_chgled_func)
+	if (axp202_config.pmu_chgled_func)
 		axp_regmap_set_bits(map, 0x32, 0x08); /* control by pmu */
 	else
 		axp_regmap_clr_bits(map, 0x32, 0x08); /* drive charge */
 
 	/*set CHGLED Indication Type*/
-	if (axp20_config.pmu_chgled_type)
+	if (axp202_config.pmu_chgled_type)
 		axp_regmap_set_bits(map, 0x34, 0x10); /* Type B */
 	else
 		axp_regmap_clr_bits(map, 0x34, 0x10); /* Type A */
 
 	/*Init battery capacity correct function*/
-	if (axp20_config.pmu_batt_cap_correct)
+	if (axp202_config.pmu_batt_cap_correct)
 		axp_regmap_set_bits(map, 0xb8, 0x20); /* enable */
 	else
 		axp_regmap_clr_bits(map, 0xb8, 0x20); /* disable */
 
-	if (!axp20_config.pmu_batdeten)
+	if (!axp202_config.pmu_batdeten)
 		axp_regmap_clr_bits(map, AXP20_OFF_CTL, 0x40);
 	else
 		axp_regmap_set_bits(map, AXP20_OFF_CTL, 0x40);
 
 	/* RDC initial */
 	axp_regmap_read(map, AXP20_RDC1, &val);
-	if ((axp20_config.pmu_battery_rdc) && (!(val & 0x40))) {
-		rdc = (axp20_config.pmu_battery_rdc * 10000 + 5371) / 10742;
+	if ((axp202_config.pmu_battery_rdc) && (!(val & 0x40))) {
+		rdc = (axp202_config.pmu_battery_rdc * 10000 + 5371) / 10742;
 		axp_regmap_write(map, AXP20_RDC1, ((rdc >> 8) & 0x1F)|0x80);
 		axp_regmap_write(map, AXP20_RDC0, rdc & 0x00FF);
 	}
@@ -429,7 +429,7 @@ static struct axp_interrupts axp_charger_irq[] = {
 	{"charge over",   axp_change_isr},
 };
 
-static int axp22_charger_probe(struct platform_device *pdev)
+static int axp202_charger_probe(struct platform_device *pdev)
 {
 	int ret, i, irq;
 	struct axp_charger_dev *chg_dev;
@@ -437,35 +437,35 @@ static int axp22_charger_probe(struct platform_device *pdev)
 
 	if (pdev->dev.of_node) {
 		/* get dt and sysconfig */
-		ret = axp_charger_dt_parse(pdev->dev.of_node, &axp20_config);
+		ret = axp_charger_dt_parse(pdev->dev.of_node, &axp202_config);
 		if (ret) {
 			pr_err("%s parse device tree err\n", __func__);
 			return -EINVAL;
 		}
 	} else {
-		pr_err("axp22 charger device tree err!\n");
+		pr_err("axp202 charger device tree err!\n");
 		return -EBUSY;
 	}
 
-	axp20_ac_info.ac_vol = axp20_config.pmu_ac_vol;
-	axp20_ac_info.ac_cur = axp20_config.pmu_ac_cur;
-	axp20_usb_info.usb_pc_vol = axp20_config.pmu_usbpc_vol;
-	axp20_usb_info.usb_pc_cur = axp20_config.pmu_usbpc_cur;
-	axp20_usb_info.usb_ad_vol = axp20_config.pmu_ac_vol;
-	axp20_usb_info.usb_ad_cur = axp20_config.pmu_ac_cur;
-	axp20_batt_info.runtime_chgcur = axp20_config.pmu_runtime_chgcur;
-	axp20_batt_info.suspend_chgcur = axp20_config.pmu_suspend_chgcur;
-	axp20_batt_info.shutdown_chgcur = axp20_config.pmu_shutdown_chgcur;
-	battery_data.voltage_max_design = axp20_config.pmu_init_chgvol
+	axp202_ac_info.ac_vol = axp202_config.pmu_ac_vol;
+	axp202_ac_info.ac_cur = axp202_config.pmu_ac_cur;
+	axp202_usb_info.usb_pc_vol = axp202_config.pmu_usbpc_vol;
+	axp202_usb_info.usb_pc_cur = axp202_config.pmu_usbpc_cur;
+	axp202_usb_info.usb_ad_vol = axp202_config.pmu_ac_vol;
+	axp202_usb_info.usb_ad_cur = axp202_config.pmu_ac_cur;
+	axp202_batt_info.runtime_chgcur = axp202_config.pmu_runtime_chgcur;
+	axp202_batt_info.suspend_chgcur = axp202_config.pmu_suspend_chgcur;
+	axp202_batt_info.shutdown_chgcur = axp202_config.pmu_shutdown_chgcur;
+	battery_data.voltage_max_design = axp202_config.pmu_init_chgvol
 								* 1000;
-	battery_data.voltage_min_design = axp20_config.pmu_pwroff_vol
+	battery_data.voltage_min_design = axp202_config.pmu_pwroff_vol
 								* 1000;
-	battery_data.energy_full_design = axp20_config.pmu_battery_cap;
+	battery_data.energy_full_design = axp202_config.pmu_battery_cap;
 
-	axp20_charger_init(axp_dev);
+	axp202_charger_init(axp_dev);
 
 	chg_dev = axp_power_supply_register(&pdev->dev, axp_dev,
-					&battery_data, &axp20_spy_info);
+					&battery_data, &axp202_spy_info);
 	if (IS_ERR_OR_NULL(chg_dev))
 		goto fail;
 
@@ -501,7 +501,7 @@ fail:
 	return -1;
 }
 
-static int axp20_charger_remove(struct platform_device *pdev)
+static int axp202_charger_remove(struct platform_device *pdev)
 {
 	int i, irq;
 	struct axp_charger_dev *chg_dev = platform_get_drvdata(pdev);
@@ -519,7 +519,7 @@ static int axp20_charger_remove(struct platform_device *pdev)
 	return 0;
 }
 
-static int axp22_charger_suspend(struct platform_device *dev,
+static int axp202_charger_suspend(struct platform_device *dev,
 				pm_message_t state)
 {
 	struct axp_charger_dev *chg_dev = platform_get_drvdata(dev);
@@ -530,7 +530,7 @@ static int axp22_charger_suspend(struct platform_device *dev,
 	return 0;
 }
 
-static int axp22_charger_resume(struct platform_device *dev)
+static int axp202_charger_resume(struct platform_device *dev)
 {
 	struct axp_charger_dev *chg_dev = platform_get_drvdata(dev);
 	struct axp_regmap *map = chg_dev->chip->regmap;
@@ -558,35 +558,35 @@ static int axp22_charger_resume(struct platform_device *dev)
 	return 0;
 }
 
-static void axp20_charger_shutdown(struct platform_device *dev)
+static void axp202_charger_shutdown(struct platform_device *dev)
 {
 	struct axp_charger_dev *chg_dev = platform_get_drvdata(dev);
 	axp_charger_shutdown(chg_dev);
 }
 
-static const struct of_device_id axp20_charger_dt_ids[] = {
+static const struct of_device_id axp202_charger_dt_ids[] = {
 	{ .compatible = "axp209-charger", },
 	{},
 };
-MODULE_DEVICE_TABLE(of, axp20_charger_dt_ids);
+MODULE_DEVICE_TABLE(of, axp202_charger_dt_ids);
 
-static struct platform_driver axp20_charger_driver = {
+static struct platform_driver axp202_charger_driver = {
 	.driver     = {
-		.name   = "axp20-charger",
-		.of_match_table = axp20_charger_dt_ids,
+		.name   = "axp202-charger",
+		.of_match_table = axp202_charger_dt_ids,
 	},
-	.probe    = axp22_charger_probe,
-	.remove   = axp20_charger_remove,
-	.suspend  = axp22_charger_suspend,
-	.resume   = axp22_charger_resume,
-	.shutdown = axp20_charger_shutdown,
+	.probe    = axp202_charger_probe,
+	.remove   = axp202_charger_remove,
+	.suspend  = axp202_charger_suspend,
+	.resume   = axp202_charger_resume,
+	.shutdown = axp202_charger_shutdown,
 };
 
-static int __init axp20_charger_initcall(void)
+static int __init axp202_charger_initcall(void)
 {
 	int ret;
 
-	ret = platform_driver_register(&axp20_charger_driver);
+	ret = platform_driver_register(&axp202_charger_driver);
 	if (IS_ERR_VALUE(ret)) {
 		pr_err("%s: failed, errno %d\n", __func__, ret);
 		return -EINVAL;
@@ -594,9 +594,9 @@ static int __init axp20_charger_initcall(void)
 
 	return 0;
 }
-fs_initcall_sync(axp20_charger_initcall);
+fs_initcall_sync(axp202_charger_initcall);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Qin <qinyongshen@allwinnertech.com>");
 MODULE_DESCRIPTION("Charger Driver for axp20x PMIC");
-MODULE_ALIAS("platform:axp22-charger");
+MODULE_ALIAS("platform:axp202-charger");
