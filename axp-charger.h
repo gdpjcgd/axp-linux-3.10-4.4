@@ -320,6 +320,7 @@ struct axp_charger_dev {
 	struct timer_list usb_status_timer;
 	struct delayed_work work;
 	struct delayed_work usbwork;
+	struct delayed_work axp_usbin_isr_delayed;
 	unsigned int interval;
 	struct mutex charger_lock;
 
@@ -382,7 +383,6 @@ struct axp_charger_dev *axp_power_supply_register(struct device *dev,
 					struct power_supply_info *battery_info,
 					struct axp_supply_info *info);
 void axp_power_supply_unregister(struct axp_charger_dev *chg_dev);
-extern void axp_usb_isr_delayed(void);
 void axp_change(struct axp_charger_dev *chg_dev);
 void axp_usbac_in(struct axp_charger_dev *chg_dev);
 void axp_usbac_out(struct axp_charger_dev *chg_dev);
