@@ -892,8 +892,8 @@ void axp_usbac_in(struct axp_charger_dev *chg_dev)
 {
 	struct axp_usb_info *usb = chg_dev->spy_info->usb;
 
-	axp_usbcur(CHARGE_AC);
-	axp_usbvol(CHARGE_AC);
+	//axp_usbcur(CHARGE_AC);
+//	axp_usbvol(CHARGE_AC);
 
 	AXP_DEBUG(AXP_CHG, chg_dev->chip->pmu_num, "axp ac/usb in!\n");
 
@@ -903,10 +903,12 @@ void axp_usbac_in(struct axp_charger_dev *chg_dev)
 	/* must limit the current now,
 	 * and will again fix it while usb/ac detect finished!
 	*/
+#ifndef CONFIG_AXP_BC
 	if (usb->usb_pc_cur)
 		usb->set_usb_ihold(chg_dev, usb->usb_pc_cur);
 	else
 		usb->set_usb_ihold(chg_dev, 500);
+#endif
 	plug_debounce = 1;
 	/* this is about 3.5s,
 	* while the flag set in usb drivers after usb plugged
@@ -983,7 +985,7 @@ void axp_usb_isr_delayed(struct work_struct *usbin_isr)
      bc_result=chg_dev->spy_info->usb->get_bc_result(chg_dev);
      printk("[axp] BC result:%d\n",bc_result);
      if(bc_result==BC_DCP){
-         chg_dev->spy_info->usb->set_usb_ihold(axp2585_config.pmu_ac_cur);
+         chg_dev->spy_info->usb->set_usb_ihold(chg_dev,chg_dev->spy_info->usb->usb_ad_cur);
 
      }
      printk("[axp]Quit isr :%s\n",__func__);
