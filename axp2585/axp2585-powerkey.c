@@ -33,7 +33,8 @@
 static int axp2585_powerkey_probe(struct platform_device *pdev)
 {
     printk("[axp2585]Entering %s\n",__func__);
-	struct axp_dev *axp_dev = dev_get_drvdata(pdev->dev.parent);
+	struct axp_dev *axp_dev ;
+	axp_dev= dev_get_drvdata(pdev->dev.parent);
 	struct axp_powerkey_info *info;
 	struct input_dev *powerkey_dev;
 	int err = 0, i, irq, ret;

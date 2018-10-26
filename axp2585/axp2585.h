@@ -72,8 +72,7 @@
 #define AXP2585_CHGLED             (0x90)
 #define AXP2585_GAUGE_CTRL   (0xB8)
 #define AXP2585_CAP_PERCENT             (0xB9)
-#define AXP2585_RDC1                             (0xBA)
-#define AXP2585_RDC0                            (0xBB)
+
 #define AXP2585_OCV1                            (0xBC)
 #define AXP2585_MAX_CAP                   (0xE0)
 #define AXP2585_COUL_COUNTER       (0xE2)

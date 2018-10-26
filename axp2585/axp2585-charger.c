@@ -645,14 +645,10 @@ static void axp2585_private_debug(struct axp_charger_dev *cdev)
 
 static int axp2585_charger_probe(struct platform_device *pdev)
 {
-    printk("[axp2585]Entering %s\n",__func__);
-	int ret, i, irq;
+    int ret, i, irq;
 	struct axp_charger_dev *chg_dev;
 	struct axp_dev *axp_dev = dev_get_drvdata(pdev->dev.parent);
-    printk("[axp2585]pointer to axp_dev->irq_data->irqs:%p in line:%d %s\n",\
-           axp_dev->irq_data->irqs,__LINE__,__func__);
-    printk("[axp2585] pointer to of_node is %p in line:%d in %s\n",
-                       pdev->dev.of_node,__LINE__,__func__);
+    printk("[axp2585]Entering %s\n",__func__);
 	if (pdev->dev.of_node) {
 		/* get dt and sysconfig */
 		ret = axp_charger_dt_parse(pdev->dev.of_node, &axp2585_config);
@@ -696,42 +692,8 @@ static int axp2585_charger_probe(struct platform_device *pdev)
 
 		if (irq < 0)
 			continue;
-       printk("[axp2585]i=%d ,irq=%d in line:%d of %s\n",i,irq,__LINE__,__func__);
-       printk("[axp2585]===name:%s==\n",axp2585_charger_irq[i].name);
-       axp2585_charger_irq[i].isr==NULL?\
-               printk("[axp2585]isr is NULL\n"):printk("[axp2585]isr is NOT NULL\n");
 
-      if(axp_dev->irq_data!=NULL)
-      {
-       printk("[axp2585]axp_dev->irq_data in line:%d of %s is NOT NULL\n",__LINE__,__func__ );
-         if(axp_dev->irq_data->irqs!=NULL)
-           {
-             printk("[axp2585]axp_dev->irq_data->irqs in line:%d of %s is NOT NULL\n",__LINE__,__func__ );
-           }
-             else{
-             printk("[axp2585]axp_dev->irq_data->irqs in line:%d of %s is  NULL\n",__LINE__,__func__ );
-            }
-      }
-      else
-          printk("[axp2585]axp_dev->irq_data in line:%d of %s is  NULL\n",__LINE__,__func__ );
 
-      if(axp_dev->irq!=NULL)
-           {
-            printk("[axp2585]axp_dev->int irq in line:%d of %d is %s NOT NULL\n",__LINE__,axp_dev->irq,__func__ );
-           }
-           else
-             {
-               printk("[axp2585]axp_dev->irq in line:%d of %s is  NULL\n",__LINE__,__func__ );
-             }
-      if(axp_dev->irq_data!=NULL){
-          printk("[axp2585]Pointer to axp2585_charger_irq[%d].isr is %p\n",\
-                 i,axp2585_charger_irq[i].isr);
-          printk("[axp2585]Pointer to axp2585_charger_irq[%d].name:%s is %p\n",\
-                          i,axp2585_charger_irq[i].name,&axp2585_charger_irq[i].name);
-          printk("[axp2585]pointer to axp_dev->irq_data:%p in line:%d %s\n",\
-                     axp_dev->irq_data,__LINE__,__func__);
-          printk("[axp2585]pointer to axp_dev->irq_data->irqs:%p in line:%d %s\n",\
-                     axp_dev->irq_data->irqs,__LINE__,__func__);
 		ret = axp_request_irq(axp_dev, irq,
 				axp2585_charger_irq[i].isr, chg_dev);
 		if (ret != 0) {
@@ -743,7 +705,7 @@ static int axp2585_charger_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "Requested %s IRQ %d: %d\n",
 			axp2585_charger_irq[i].name, irq, ret);
 	}
-	}
+
 
 	platform_set_drvdata(pdev, chg_dev);
 	ret = sysfs_create_group(&pdev->dev.kobj, &bmu_control_attr_group);

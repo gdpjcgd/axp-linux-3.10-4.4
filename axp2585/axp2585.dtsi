@@ -79,7 +79,7 @@
 				pmu_bat_para30 = <0x5e>;
 				pmu_bat_para31 = <0x5f>;
 				pmu_bat_para32 = <0x64>;
-				pmu_bat_temp_enable = <0x0>;
+				pmu_bat_temp_enable = <0x1>;
 				pmu_bat_charge_ltf = <0x8d5>;
 				pmu_bat_charge_htf = <0x184>;
 				pmu_bat_shutdown_ltf = <0xc80>;

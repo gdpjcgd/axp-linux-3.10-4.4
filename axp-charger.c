@@ -31,8 +31,8 @@
 #include "axp-charger.h"
 
 static int axp_power_key;
-static enum AW_CHARGE_TYPE axp_usbcurflag = CHARGE_AC;
-static enum AW_CHARGE_TYPE axp_usbvolflag = CHARGE_AC;
+static enum AW_CHARGE_TYPE axp_usbcurflag = CHARGE_USB_20;
+static enum AW_CHARGE_TYPE axp_usbvolflag = CHARGE_USB_30;
 
 static struct axp_adc_res adc;
 static bool battery_initialized;
@@ -984,9 +984,13 @@ void axp_usb_isr_delayed(struct work_struct *usbin_isr)
      axp_usbac_in(chg_dev);
      bc_result=chg_dev->spy_info->usb->get_bc_result(chg_dev);
      printk("[axp] BC result:%d\n",bc_result);
-     if(bc_result==BC_DCP){
-         chg_dev->spy_info->usb->set_usb_ihold(chg_dev,chg_dev->spy_info->usb->usb_ad_cur);
-
+    switch(bc_result){
+    case BC_DCP:chg_dev->spy_info->usb->set_usb_ihold(chg_dev,chg_dev->spy_info->usb->usb_ad_cur);
+                                 axp_usbcur(CHARGE_AC);
+                                 break;
+    case BC_SDP:axp_usbcur(CHARGE_USB_20);
+                                break;
+    default:break;
      }
      printk("[axp]Quit isr :%s\n",__func__);
 
@@ -1011,8 +1015,9 @@ irqreturn_t axp_usb_in_isr(int irq, void *data)
 irqreturn_t axp_usb_out_isr(int irq, void *data)
 {
 	struct axp_charger_dev *chg_dev = data;
-    printk("[axp]Entering isr :%s\n",__func__);
-
+    //printk("[axp]Entering isr :%s\n",__func__);
+    AXP_DEBUG(AXP_INT, chg_dev->chip->pmu_num,
+                "Entering isr :%s\n", __func__);
 	axp_usb_connect = 0;
 	axp_change(chg_dev);
 	axp_usbac_out(chg_dev);
